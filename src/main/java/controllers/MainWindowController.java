@@ -24,9 +24,10 @@ public class MainWindowController {
 
     public void changeColonToP(ActionEvent actionEvent) throws IOException, UnsupportedFlavorException {
         String data = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-        String newString = data.replaceAll(":", "\\$P\\{");
-        //String finalString = newString.replaceAll("","");
-        System.out.println(newString);
+    String newString = data.replaceAll("([:])(\\w[_]\\w*(?= ))", "\\$P{$2}");
 
+        StringSelection selection = new StringSelection(newString);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
     }
 }
